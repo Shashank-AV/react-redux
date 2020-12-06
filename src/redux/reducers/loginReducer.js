@@ -4,7 +4,7 @@ import isEmpty from '../../validation/is-empty';
 
 const initialState = {
   isAuthenticated: false,
-  user: '',
+  user: {loginData},
   loading: false,
 };
 

@@ -46,7 +46,7 @@ class Login extends Component {
       this.state.usernameOrEmail !== "hruday@gmail.com"
     ) {
       const Email_Id = e.target.value;
-      console.log(Email_Id);
+      // console.log(Email_Id);
     }
   };
 
@@ -89,10 +89,7 @@ class Login extends Component {
     return isError;
   };
 
-  handeleSubmit = (e) => {
-    e.preventDefault();
-
-    const { history } = this.props;
+  handeleSubmit = () => {
 
     const err = this.validate();
     // console.log(err);
@@ -103,7 +100,11 @@ class Login extends Component {
       };
       this.props.signIn(userData);
     }
-    history.push("/dashboard");
+    if (!err) {
+      if(this.props.auth.isAuthenticated === true) {
+        this.props.history.push("/dashboard")
+      }
+    }
   };
 
   render() {
@@ -156,7 +157,7 @@ class Login extends Component {
               <Smallbutton
                 variant="outlined"
                 color="primary"
-                onClick={(e) => this.handeleSubmit(e)}
+                onClick={this.handeleSubmit}
                 size="small"
               >
                 Login

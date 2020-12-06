@@ -7,11 +7,17 @@ import './Header.scss';
 import { withRouter  } from 'react-router';
 
 class Header extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isAuthenticated: true
+        };
+    }
 
-    state = {
-        drawerOpen: false,
-        headerShow: false,
-        feedbackOpen: false
+    componentDidMount() {
+        if(this.props.auth.isAuthenticated === false) {
+            this.props.history.push('/')
+        }
     }
 
     toggleDrawer = (value) => {
@@ -26,9 +32,9 @@ class Header extends Component {
         })
     }
 
-    handleBackLogin = (e) => {
-        e.preventDefault()
+    handleBackLogin = () => {
         this.props.history.push('/')
+        this.setState({isAuthenticated: false}, () => console.log())
     }
 
     render() {
